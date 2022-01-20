@@ -229,7 +229,7 @@ public class ElasticRepository implements Closeable {
         validate(updateEntityRequest);
 
         UpdateRequest updateRequest = new UpdateRequest(updateEntityRequest.getIndexName(), updateEntityRequest.getReferenceId())
-                .doc(updateEntityRequest.getValue())
+                .doc(updateEntityRequest.getValue(), XContentType.JSON)
                 .routing(updateEntityRequest.getRoutingKey())
                 .setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
         try {
