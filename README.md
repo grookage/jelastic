@@ -1,4 +1,4 @@
-# JElastic [![Travis build status](https://travis-ci.org/koushikr/jelastic.svg?branch=master)](https://travis-ci.org/koushikr/jelastic)
+# JElastic [![Build](https://github.com/grookage/jelastic/actions/workflows/build.yml/badge.svg)](https://github.com/grookage/jelastic/actions/workflows/build.yml)
 
 > Your mind is like a tunnel that has no end, and a baloon, that even too much air cannot burst.
 > - by Michael Bassey Johnson
@@ -11,7 +11,7 @@ JElastic is for using elasticsearch within application paradigm without setting 
 ### Build instructions
   - Clone the source:
 
-        git clone github.com/koushikr/jelastic
+        git clone github.com/grookage/jelastic
 
   - Build
 
@@ -56,27 +56,20 @@ JElastic is for using elasticsearch within application paradigm without setting 
 ```
 
 ### Maven Dependency
-Use the following repository:
-```xml
-<repository>
-    <id>clojars</id>
-    <name>Clojars repository</name>
-    <url>https://clojars.org/repo</url>
-</repository>
-```
+
 Use the following maven dependency
 ```xml
 <dependency>
     <groupId>io.github.jelastic</groupId>
     <artifactId>jelastic</artifactId>
-    <version>7.2.0-7-SNAPSHOT</version>
+    <version>7.2.1</version>
 </dependency>
 ```
 
 ### Version support
 | jelastic               |  es client|
 | -----------------------| ------------------- |
-| 7.2.0-7                |  7.2.0 (rest high level client)              |
+| 7.2.1                  |  7.2.1 (rest high level client)              |
 
 ### Configuration
 ```yaml

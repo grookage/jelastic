@@ -6,7 +6,12 @@
     <groupId>io.github.jelastic</groupId>
     <artifactId>jelastic</artifactId>
     <packaging>jar</packaging>
-    <version>7.2.0-8-SNAPSHOT</version>
+    <version>7.2.1</version>
+
+    <name>jelastic</name>
+    <url>https://github.com/grookage/jelastic</url>
+    <description>A search DSL written in java atop Elasticsearch</description>
+    <inceptionYear>2019</inceptionYear>
 
     <licenses>
         <license>
@@ -18,10 +23,10 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:https://github.com/koushikr/jelastic.git</connection>
-        <developerConnection>scm:git:https://github.com/koushikr/jelastic.git</developerConnection>
+        <connection>scm:git:https://github.com/grookage/jelastic.git</connection>
+        <developerConnection>scm:git:https://github.com/grookage/jelastic.git</developerConnection>
         <tag>HEAD</tag>
-        <url>https://github.com/koushikr/jelastic.git</url>
+        <url>https://github.com/grookage/jelastic.git</url>
     </scm>
 
     <developers>
@@ -47,7 +52,7 @@
         <!--lib versions-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <lombok.version>1.18.6</lombok.version>
-        <dropwizard.version>1.3.21</dropwizard.version>
+        <dropwizard.version>2.0.28</dropwizard.version>
         <guice.version>4.2.1</guice.version>
         <lombok.maven.version>1.16.6.1</lombok.maven.version>
         <jackson.version>2.9.10.7</jackson.version>
@@ -59,18 +64,14 @@
         <jacoco.reportPath>${project.basedir}/../target/jacoco.exec</jacoco.reportPath>
 
         <!--Sonar properties-->
-        <sonar.sources>src/main</sonar.sources>
-        <sonar.tests>src/test</sonar.tests>
-        <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-        <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-        <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
-        <sonar.jacoco.itReportPath>${project.basedir}/../target/jacoco-it.exec</sonar.jacoco.itReportPath>
-        <sonar.language>java</sonar.language>
-        <sonar.version>3.6.0.1398</sonar.version>
+        <sonar.organization>grookage</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <!--Elastic search properties-->
-        <elasticsearch.version>7.2.0</elasticsearch.version>
-
+        <elasticsearch.version>7.2.1</elasticsearch.version>
+        <sonar.coverage.exclusions>
+            **com/grookage/jelastic/**
+        </sonar.coverage.exclusions>
     </properties>
 
         <dependencies>
@@ -84,6 +85,7 @@
                 <groupId>io.dropwizard</groupId>
                 <artifactId>dropwizard-core</artifactId>
                 <version>${dropwizard.version}</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/io.dropwizard/dropwizard-validation -->
@@ -160,20 +162,6 @@
             </dependency>
         </dependencies>
 
-    <profiles>
-        <profile>
-
-            <id>jelastic</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <project.version>0.0.1-SNAPSHOT</project.version>
-                <build.number>0</build.number>
-                <build.revision>local-dev</build.revision>
-            </properties>
-        </profile>
-    </profiles>
 
 
     <build>
@@ -181,22 +169,35 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <release>11</release>
+                    <source>11</source>
+                    <target>11</target>
+                    <forceJavacCompilerUse>true</forceJavacCompilerUse>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.ow2.asm</groupId>
+                        <artifactId>asm</artifactId>
+                        <version>7.2</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.18.1</version>
-        	    <configuration>
-                    <forkCount>3</forkCount>
-                    <reuseForks>true</reuseForks>
-                    <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-                </configuration>    
-	</plugin>
+                <version>2.19.1</version>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -204,86 +205,123 @@
                 <version>3.0.3</version>
             </plugin>
 
-            <!-- Source code metrics: mvn javancss:report or mvn site -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>javancss-maven-plugin</artifactId>
-                <version>2.0</version>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.version}</version>
-                <configuration>
-                    <destFile>${sonar.jacoco.reportPaths}</destFile>
-                    <append>true</append>
-                </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
-                        <id>agent</id>
+                        <id>attach-sources</id>
                         <goals>
-                            <goal>prepare-agent</goal>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>${sonar.version}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <source>11</source>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
-
         </plugins>
     </build>
 
-    <reporting>
-        <plugins>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <reportSets>
-                    <reportSet>
-                        <reports>
-                            <!-- select non-aggregate reports -->
-                            <report>report</report>
-                        </reports>
-                    </reportSet>
-                </reportSets>
-            </plugin>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.3</version>
-            </plugin>
-        </plugins>
-    </reporting>
-
-    <repositories>
-        <repository>
-            <id>clojars</id>
-            <name>Clojars repository</name>
-            <url>https://clojars.org/repo</url>
-        </repository>
-        <repository>
-            <id>elastic-lucene-snapshots</id>
-            <name>Elastic Lucene Snapshots</name>
-            <url>http://s3.amazonaws.com/download.elasticsearch.org/lucenesnapshots/00142c9</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
+    <profiles>
+        <profile>
+            <id>release</id>
+            <activation>
+                <property>
+                    <name>release</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.7</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <useAgent>true</useAgent>
+                                    <executable>gpg</executable>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-enforcer-plugin</artifactId>
+                        <version>3.0.0-M2</version>
+                        <executions>
+                            <execution>
+                                <id>enforce-no-snapshots</id>
+                                <goals>
+                                    <goal>enforce</goal>
+                                </goals>
+                                <configuration>
+                                    <rules>
+                                        <requireReleaseDeps>
+                                            <message>No Snapshots Allowed!</message>
+                                        </requireReleaseDeps>
+                                    </rules>
+                                    <fail>true</fail>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <configuration>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                            <useReleaseProfile>false</useReleaseProfile>
+                            <releaseProfiles>release</releaseProfiles>
+                            <goals>deploy</goals>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
         <repository>
-            <id>clojars</id>
-            <name>Clojars repository</name>
-            <url>https://clojars.org/repo</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-
 </project>

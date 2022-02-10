@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.2.1
+1. Updated to com.grookage from io.grookage
+
 ## 7.2.0-7-SNAPSHOT
 1. Updated to elasticsearch rest client from the existing transport client.
 
