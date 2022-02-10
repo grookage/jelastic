@@ -60,7 +60,7 @@ JElastic is for using elasticsearch within application paradigm without setting 
 Use the following maven dependency
 ```xml
 <dependency>
-    <groupId>io.github.jelastic</groupId>
+    <groupId>com.grookage.jelastic</groupId>
     <artifactId>jelastic</artifactId>
     <version>7.2.1</version>
 </dependency>
@@ -81,11 +81,6 @@ jelastic:
   settingsFile: ~/configs/settings.xml
   maxResultSize: 10000    
 ```
-
-Contributors
-------------
-* [Koushik R](https://github.com/koushikr)
-* [Sunil Rajashekar](https://github.com/sunil-rajashekar) 
 
 LICENSE
 -------

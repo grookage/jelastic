@@ -30,7 +30,6 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.val;
 
 /**
  * @author koushik

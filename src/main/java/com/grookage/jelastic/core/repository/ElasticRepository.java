@@ -17,7 +17,6 @@ package com.grookage.jelastic.core.repository;
 
 import com.google.common.collect.Lists;
 import com.grookage.jelastic.core.elastic.ElasticClient;
-import com.grookage.jelastic.core.exception.InvalidQueryException;
 import com.grookage.jelastic.core.exception.JelasticException;
 import com.grookage.jelastic.core.exception.JsonMappingException;
 import com.grookage.jelastic.core.managers.QueryManager;
@@ -151,14 +150,6 @@ public class ElasticRepository implements Closeable {
         }
     }
 
-    /**
-     * Method to retrieve document based on referenceId.
-     *
-     * @param getSourceRequest getSourceRequest
-     * @param <T> class to be retrieved
-     * @throws JsonMappingException when there is IOException, JsonParseException & JsonMappingException
-     * @return Optional<T>
-     */
     public <T> Optional<T> get(GetSourceRequest<T> getSourceRequest) {
         validate(getSourceRequest);
         GetResponse getResponse;
@@ -180,12 +171,6 @@ public class ElasticRepository implements Closeable {
         }
     }
 
-    /**
-     * Method to persist entity into ElasticSearch.
-     *
-     * @param entitySaveRequest entitySaveRequest
-     * @throws IndexNotFoundException when index is not created.
-     */
     public void save(EntitySaveRequest entitySaveRequest) {
         validate(entitySaveRequest);
         var exists = isExistsIndex(entitySaveRequest.getIndexName());
@@ -280,14 +265,6 @@ public class ElasticRepository implements Closeable {
         }
     }
 
-    /**
-     * Search elasticSearch based on the search query passed.
-     *
-     * @param searchRequest searchRequest
-     * @param <T> Response class Type
-     * @throws InvalidQueryException when query is not built correctly.
-     * @return SearchResponse<T> list of objects that meet searchCriteria
-     */
     @SuppressWarnings("ToArrayCallWithZeroLengthArrayArgument")
     public <T> SearchResponse<T> enumeratedSearch(SearchRequest<T> searchRequest) {
         validate(searchRequest);
@@ -317,7 +294,6 @@ public class ElasticRepository implements Closeable {
         }
         return ElasticUtils.getSearchResponse(searchResponse, searchRequest.getKlass());
     }
-
 
     public <T> SearchResponse<T> search(String index, QueryBuilder queryBuilder,
                                         PageWindow pageWindow, Class<T> klass) {
@@ -351,18 +327,6 @@ public class ElasticRepository implements Closeable {
         return ElasticUtils.getResponse(multiGetItemResponses, idSearchRequest.getKlass());
     }
 
-    /**
-     * Load data of entire index based on batchSize using ES scroll API
-     * During first request to ES we send scroll ttl and the response return result along with scroll Id. Then for all
-     * subsequent we send this scroll id as request param. ES knows how much data is returned in previous calls. We fetch
-     * the data in batches using batchSize which should be < 10k for better performance
-     *
-     * @param <T> Response class Type
-     * @param index Index to be loaded
-     * @param query jelastic query object
-     * @param batchSize Will tell ElasticClient the size of each fetch, should be <= 10000 for better performance
-     * @return List<T> list of all objects in that index
-     */
     public <T> List<T> loadAll(String index, Query query, int batchSize, Class<T> klass) {
         final var maxResultSize = elasticClient.getJElasticConfiguration().getMaxResultSize();
 
@@ -401,22 +365,18 @@ public class ElasticRepository implements Closeable {
 
     }
 
-  /**
-   * Method to delete a document based on reference id
-   * @param deleteEntityRequest deleteEntityRequest
-   */
-  public void delete(DeleteEntityRequest deleteEntityRequest) {
+    public void delete(DeleteEntityRequest deleteEntityRequest) {
         validate(deleteEntityRequest);
         final var request = new DeleteRequest(deleteEntityRequest.getIndexName(),deleteEntityRequest.getReferenceId());
         request.routing(deleteEntityRequest.getRoutingKey());
         request.setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE);
 
-      try {
-          elasticClient.getClient().delete(request,RequestOptions.DEFAULT);
-      } catch (IOException e) {
-          throw new JelasticException("Error Deleting entity", e);
-      }
-  }
+        try {
+            elasticClient.getClient().delete(request,RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            throw new JelasticException("Error Deleting entity", e);
+        }
+    }
 
     @Override
     public void close() {
