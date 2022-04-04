@@ -90,11 +90,6 @@ public class ElasticRepository implements Closeable {
         }
     }
 
-    /**
-     * Runs with the {@link ValidationUtil} when runWithValidator is true.
-     * Works with the request validation of jaxrs!
-     * @param request Any java object
-     */
     public <T> void validate(T request){
         if(elasticClient.getJElasticConfiguration().isRunWithValidator()){
             ValidationUtil.validateRequest(request);
