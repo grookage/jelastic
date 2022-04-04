@@ -5,7 +5,7 @@
     <groupId>com.grookage.jelastic</groupId>
     <artifactId>jelastic</artifactId>
     <packaging>jar</packaging>
-    <version>7.3.1</version>
+    <version>7.3.2-SNAPSHOT</version>
 
     <name>jelastic</name>
     <url>https://github.com/grookage/jelastic</url>
@@ -24,7 +24,7 @@
     <scm>
         <connection>scm:git:https://github.com/grookage/jelastic.git</connection>
         <developerConnection>scm:git:https://github.com/grookage/jelastic.git</developerConnection>
-        <tag>jelastic-7.3.1</tag>
+        <tag>jelastic-7.3.0</tag>
         <url>https://github.com/grookage/jelastic.git</url>
     </scm>
 
