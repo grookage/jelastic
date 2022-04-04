@@ -69,7 +69,7 @@ Use the following maven dependency
 ### Version support
 | jelastic               |  es client|
 | -----------------------| ------------------- |
-| 7.2.1-1                |  7.2.1 (rest high level client)              |
+| 7.2.1-3                |  7.2.1 (rest high level client)              |
 
 ### Configuration
 ```yaml

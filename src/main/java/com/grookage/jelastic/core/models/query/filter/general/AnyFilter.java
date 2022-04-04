@@ -30,10 +30,15 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@SuppressWarnings("unused")
 public class AnyFilter extends Filter {
 
     public AnyFilter() {
-        super(FilterType.ANY, "any");
+        super(FilterType.ANY);
+    }
+
+    public AnyFilter(String fieldName){
+        super(FilterType.ANY, fieldName);
     }
 
     @Override
