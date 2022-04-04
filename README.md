@@ -62,7 +62,7 @@ Use the following maven dependency
 <dependency>
     <groupId>com.grookage.jelastic</groupId>
     <artifactId>jelastic</artifactId>
-    <version>7.2.1-2</version>
+    <version>7.3.0</version>
 </dependency>
 ```
 
@@ -70,6 +70,7 @@ Use the following maven dependency
 | jelastic               |  es client|
 | -----------------------| ------------------- |
 | 7.2.1-2                |  7.2.1 (rest high level client)              |
+| 7.3.0                  |  7.3.0 (rest high level client)              |
 
 ### Configuration
 ```yaml
