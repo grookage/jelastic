@@ -1,10 +1,8 @@
 # Changelog
 
-## 7.2.1-3
-1. Fixed a bug in the ANY filter, which was incorrectly marking a fieldName as any instead of the constructor
-
 ## 7.2.1-2
 1. Fixed the lombok annotations on the pageWindow
+2. Fixed a bug in the ANY filter, which was incorrectly marking a fieldName as any instead of the constructor
 
 ## 7.2.1
 1. Updated to com.grookage from io.grookage
