@@ -5,7 +5,7 @@
     <groupId>com.grookage.jelastic</groupId>
     <artifactId>jelastic</artifactId>
     <packaging>jar</packaging>
-    <version>7.2.2-SNAPSHOT</version>
+    <version>7.3.0-SNAPSHOT</version>
 
     <name>jelastic</name>
     <url>https://github.com/grookage/jelastic</url>
@@ -67,7 +67,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <!--Elastic search properties-->
-        <elasticsearch.version>7.2.1</elasticsearch.version>
+        <elasticsearch.version>7.3.0</elasticsearch.version>
         <sonar.coverage.exclusions>
             **com/grookage/jelastic/**
         </sonar.coverage.exclusions>
