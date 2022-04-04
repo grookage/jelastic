@@ -5,7 +5,7 @@
     <groupId>com.grookage.jelastic</groupId>
     <artifactId>jelastic</artifactId>
     <packaging>jar</packaging>
-    <version>7.2.1-2</version>
+    <version>7.2.1-2-SNAPSHOT</version>
 
     <name>jelastic</name>
     <url>https://github.com/grookage/jelastic</url>
@@ -217,6 +217,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
