@@ -5,7 +5,7 @@
     <groupId>com.grookage.jelastic</groupId>
     <artifactId>jelastic</artifactId>
     <packaging>jar</packaging>
-    <version>7.2.1-2</version>
+    <version>7.2.1-3-SNAPSHOT</version>
 
     <name>jelastic</name>
     <url>https://github.com/grookage/jelastic</url>
