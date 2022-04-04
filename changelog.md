@@ -1,10 +1,11 @@
 # Changelog
 
-## 7.2.1-2
+## 7.3.0
 1. Fixed the lombok annotations on the pageWindow
 2. Fixed a bug in the ANY filter, which was incorrectly marking a fieldName as any instead of the constructor
+3. Upgraded to Elasticsearch 7.3.0
 
-## 7.2.1
+## 7.2.1-1
 1. Updated to com.grookage from io.grookage
 
 ## 7.2.0-7-SNAPSHOT
