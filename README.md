@@ -62,7 +62,7 @@ Use the following maven dependency
 <dependency>
     <groupId>com.grookage.jelastic</groupId>
     <artifactId>jelastic</artifactId>
-    <version>7.2.1-1</version>
+    <version>7.2.1-2</version>
 </dependency>
 ```
 
