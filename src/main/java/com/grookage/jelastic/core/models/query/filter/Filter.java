@@ -22,7 +22,9 @@ import com.grookage.jelastic.core.models.query.filter.general.*;
 import com.grookage.jelastic.core.models.query.filter.number.*;
 import com.grookage.jelastic.core.models.query.filter.predicate.AndFilter;
 import com.grookage.jelastic.core.models.query.filter.predicate.ORFilter;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
 /**

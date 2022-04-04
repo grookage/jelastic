@@ -17,10 +17,7 @@ package com.grookage.jelastic.core.models.query.filter.number;
 
 import com.grookage.jelastic.core.models.query.filter.FilterType;
 import com.grookage.jelastic.core.models.query.filter.FilterVisitor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * Created by koushikr

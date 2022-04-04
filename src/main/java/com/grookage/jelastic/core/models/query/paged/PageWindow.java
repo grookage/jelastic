@@ -15,8 +15,10 @@
  */
 package com.grookage.jelastic.core.models.query.paged;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 
@@ -25,6 +27,8 @@ import javax.validation.constraints.Min;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class PageWindow {
 
     @Min(0)

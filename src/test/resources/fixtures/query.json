@@ -1,0 +1,20 @@
+{
+    "pageWindow" : {
+      "pageNumber" : 0,
+      "pageSize" : 10
+    },
+   "filters" : [{
+      "filterType" : "GREATER_EQUAL",
+      "fieldName" : "testField.abc",
+      "includeLower" : true,
+     "includeUpper" : true,
+     "value" : 2
+   }],
+  "sorters" : [{
+      "priority" : 0,
+      "sortOrder" : "ASC",
+      "sorterType" : "FIELD",
+      "fieldName" : "testField"
+  }]
+}
+
