@@ -66,6 +66,7 @@
         <sonar.organization>grookage</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
+
         <!--Elastic search properties-->
         <elasticsearch.version>7.3.0</elasticsearch.version>
         <sonar.coverage.exclusions>
@@ -236,6 +237,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -243,6 +245,10 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
+                        <configuration>
+                            <useAgent>true</useAgent>
+                            <executable>gpg</executable>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
