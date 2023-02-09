@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "sorterType")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "sorterType", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = FieldSorter.class, name = SorterType.FIELD),
         @JsonSubTypes.Type(value = GeoDistanceSorter.class, name = SorterType.GEO_DISTANCE),
